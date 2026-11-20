@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f7f2">
+    <title>{% block title %}{% endblock %} — UMID 2 OIL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body class="auth-page">
+    <header class="auth-header container">
+        <a class="brand" href="{% url 'home' %}" aria-label="UMID 2 OIL bosh sahifa">
+            <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M7 27V8.5A2.5 2.5 0 0 1 9.5 6h9A2.5 2.5 0 0 1 21 8.5V27M5 27h18M10 10h8v6h-8zM21 12h2.5a2 2 0 0 1 2 2v8a2 2 0 0 0 4 0v-8l-3-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="brand-name">UMID <span class="brand-number">2</span> <span class="brand-light">OIL</span></span>
+        </a>
+        <a class="auth-home-link" href="{% url 'home' %}"><span aria-hidden="true">←</span> Bosh sahifaga qaytish</a>
+    </header>
+    <main class="auth-main container">
+        <section class="auth-promo">
+            <span class="auth-promo-kicker"><span class="status-dot"></span> UMID 2 OIL hamisha yo‘lingizda</span>
+            <div class="auth-promo-art" aria-hidden="true">
+                <div class="auth-orbit"></div>
+                <div class="auth-pump"><div class="auth-pump-top"></div><div class="auth-pump-screen"></div><div class="auth-pump-hose"></div><div class="auth-pump-bottom"></div></div>
+                <span class="auth-star">✳</span>
+                <span class="auth-promo-tag">Sifat · Ishonch · Qulaylik</span>
+            </div>
+            <div class="auth-promo-copy">
+                <h1>Yaxshi yo‘l<br><span>shu yerdan</span><br>boshlanadi.</h1>
+                <p>UMID 2 OIL hamjamiyatiga qo‘shiling va safaringizni ishonch bilan davom ettiring.</p>
+            </div>
+        </section>
+        <section class="auth-panel">
+            <div class="auth-panel-inner">
+                <p class="eyebrow">{% block eyebrow %}{% endblock %}</p>
+                <h2>{% block heading %}{% endblock %}</h2>
+                <p class="auth-lead">{% block lead %}{% endblock %}</p>
+                {% block form_content %}{% endblock %}
+            </div>
+            <p class="auth-legal">Ma’lumotlaringiz hisobingizni yaratish va boshqarish uchun ishlatiladi.</p>
+        </section>
+    </main>
+    <footer class="auth-footer container"><span>© {% now "Y" %} UMID 2 OIL</span><span>Har bir safar — yangi imkoniyat.</span></footer>
+</body>
+</html>

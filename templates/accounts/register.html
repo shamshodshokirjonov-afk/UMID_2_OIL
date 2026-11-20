@@ -1,0 +1,24 @@
+{% extends "accounts/auth_base.html" %}
+
+{% block title %}Ro‘yxatdan o‘tish{% endblock %}
+{% block eyebrow %}Yangi hisob yaratish{% endblock %}
+{% block heading %}Bizga qo‘shiling{% endblock %}
+{% block lead %}Hisob yaratish uchun quyidagi ma’lumotlarni to‘ldiring.{% endblock %}
+{% block form_content %}
+    <form class="account-form" method="post">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="form-errors" role="alert">{{ form.non_field_errors }}</div>
+        {% endif %}
+        {% for field in form %}
+            <div class="form-field">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}<div class="field-help">{{ field.help_text|safe }}</div>{% endif %}
+                {% if field.errors %}<div class="field-error" role="alert">{{ field.errors }}</div>{% endif %}
+            </div>
+        {% endfor %}
+        <button class="button button-dark account-submit" type="submit">Hisob yaratish <span aria-hidden="true">↗</span></button>
+    </form>
+    <p class="auth-switch">Hisobingiz bormi? <a href="{% url 'login' %}">Kirish</a></p>
+{% endblock %}

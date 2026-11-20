@@ -1,0 +1,253 @@
+{% load humanize static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f7f2">
+    <meta name="description" content="UMID 2 OIL — sifatli yoqilg‘i, tezkor xizmat va yo‘lingizga ishonchli quvvat.">
+    <title>UMID 2 OIL — yo‘lingizga quvvat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#home" aria-label="UMID 2 OIL bosh sahifa">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none"><path d="M7 27V8.5A2.5 2.5 0 0 1 9.5 6h9A2.5 2.5 0 0 1 21 8.5V27M5 27h18M10 10h8v6h-8zM21 12h2.5a2 2 0 0 1 2 2v8a2 2 0 0 0 4 0v-8l-3-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="brand-name">UMID <span class="brand-number">2</span> <span class="brand-light">OIL</span></span>
+            </a>
+            <button class="menu-toggle" type="button" aria-label="Menyuni ochish" aria-expanded="false" aria-controls="primary-nav">
+                <span></span><span></span>
+            </button>
+            <nav class="nav-links" id="primary-nav" aria-label="Asosiy menyu">
+                <a href="#about">Biz haqimizda</a>
+                <a href="#services">Xizmatlar</a>
+                <a href="#fuel">Yoqilg‘i turlari</a>
+                <a href="#contact" class="nav-contact">Bog‘lanish <span aria-hidden="true">↗</span></a>
+                {% if user.is_authenticated %}
+                    <span class="nav-user">Salom, {{ user.username }}</span>
+                    <form class="nav-auth-form" method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="nav-auth nav-auth-quiet" type="submit">Chiqish</button>
+                    </form>
+                {% else %}
+                    <a class="nav-auth nav-auth-quiet" href="{% url 'login' %}">Kirish</a>
+                    <a class="nav-auth nav-auth-primary" href="{% url 'register' %}">Ro‘yxatdan o‘tish <span aria-hidden="true">↗</span></a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% if messages %}
+            <div class="container notification-stack" aria-live="polite">
+                {% for message in messages %}<p class="notification notification-{{ message.tags }}">{{ message }}</p>{% endfor %}
+            </div>
+        {% endif %}
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow"><span class="status-dot"></span> Har kuni siz bilan</p>
+                    <h1>Yo‘lingizga<br><span>quvvat</span> bo‘lamiz.</h1>
+                    <p class="hero-description">Sifatli yoqilg‘i, samimiy xizmat va har bir safaringizga ishonch. Yo‘lingiz qayerga bo‘lmasin, UMID 2 OIL yoningizda.</p>
+                    <div class="hero-actions">
+                        <a class="button button-dark" href="#services">Xizmatlarimiz <span aria-hidden="true">↗</span></a>
+                        <a class="text-link" href="#about">Batafsil ma’lumot <span aria-hidden="true">↓</span></a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="trust-icon" aria-hidden="true">✦</div>
+                        <p><strong>Ishonchli xizmat</strong><br>har bir kilometrda</p>
+                    </div>
+                </div>
+                <div class="hero-art" aria-label="UMID 2 OIL yoqilg‘i quyish shoxobchasi tasviri" role="img">
+                    <div class="art-sun"></div>
+                    <div class="art-label"><span class="status-dot"></span> Yoningizda, 24/7</div>
+                    <div class="art-road"></div>
+                    <div class="station">
+                        <div class="station-roof"><span></span><span></span><span></span><span></span></div>
+                        <div class="station-body">
+                            <div class="station-sign">UMID 2 <span>OIL</span></div>
+                            <div class="pump-row">
+                                <div class="pump"><div class="pump-screen"></div><div class="pump-hose"></div><div class="pump-base"></div></div>
+                                <div class="pump"><div class="pump-screen"></div><div class="pump-hose"></div><div class="pump-base"></div></div>
+                                <div class="pump"><div class="pump-screen"></div><div class="pump-hose"></div><div class="pump-base"></div></div>
+                            </div>
+                            <div class="station-pill">Sifat • Ishonch • Xizmat</div>
+                        </div>
+                    </div>
+                    <div class="art-sparkle sparkle-one">✳</div>
+                    <div class="art-sparkle sparkle-two">✦</div>
+                    <div class="art-caption"><span class="caption-icon">↗</span><span><strong>Yaxshi yo‘l</strong><br>yaxshi xizmatdan boshlanadi</span></div>
+                </div>
+            </div>
+            <div class="hero-bottom container">
+                <span>Yaxshi safar shu yerdan boshlanadi</span>
+                <a href="#daily-stats" aria-label="Kunlik ko‘rsatkichlarga o‘tish">↓</a>
+                <span class="hero-bottom-right">01 — 04</span>
+            </div>
+        </section>
+
+        <section class="daily-stats section-pad" id="daily-stats">
+            <div class="container">
+                <div class="stats-heading">
+                    <div>
+                        <p class="eyebrow"><span class="status-dot"></span> UMID 2 OIL / FAOLIYAT</p>
+                        <h2>Davrlar bo‘yicha ko‘rsatkichlar</h2>
+                    </div>
+                    <p class="stats-heading-note">Kunlik yozuvlar asosida hisoblanadi</p>
+                </div>
+                <div class="stats-table-wrap" role="region" aria-label="Davrlar bo‘yicha kunlik ko‘rsatkichlar jadvali" tabindex="0">
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Davr</th>
+                                <th scope="col">Sana oralig‘i</th>
+                                <th scope="col">Kelgan avtomobillar</th>
+                                <th scope="col">Sotilgan yoqilg‘i</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for period in stats_periods %}
+                                <tr>
+                                    <th scope="row"><span class="stats-period-dot"></span>{{ period.label }}</th>
+                                    <td class="stats-date-cell">{{ period.date_range }}</td>
+                                    <td class="stats-number">{% if period.vehicles != None %}{{ period.vehicles|intcomma }} <small>ta</small>{% else %}—{% endif %}</td>
+                                    <td class="stats-number">{% if period.liters != None %}{{ period.liters|floatformat:"-2u"|intcomma }} <small>litr</small>{% else %}—{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section section-pad" id="about">
+            <div class="container about-grid">
+                <div class="about-visual" role="img" aria-label="UMID 2 OIL xizmatini ifodalovchi yoqilg‘i uskunasi tasviri">
+                    <div class="about-visual-top"><span>UMID 2 OIL</span><span class="about-live"><i></i> ISHONCHLI XIZMAT</span></div>
+                    <div class="about-sun"></div>
+                    <div class="about-orbit"></div>
+                    <div class="about-pump">
+                        <div class="about-pump-head"><span>UMID <b>2</b> OIL</span></div>
+                        <div class="about-pump-window"><span></span><i></i></div>
+                        <div class="about-pump-controls"><i></i><i></i><i></i></div>
+                        <div class="about-pump-base"></div>
+                        <div class="about-hose"></div>
+                    </div>
+                    <div class="about-art-caption"><strong>Har bir yo‘lda</strong><br>sizga ishonchli hamroh</div>
+                    <div class="about-stamp"><strong>24</strong><span>/7</span></div>
+                    <div class="about-visual-bottom"><span>ANGREN</span><span>•</span><span>HAR KUNI SIZ BILAN</span></div>
+                </div>
+                <div class="about-copy">
+                    <p class="eyebrow about-eyebrow"><span class="status-dot"></span> 01 / Biz haqimizda</p>
+                    <h2>Bizning ishimiz —<br><span>ishonch bilan boshlangan yo‘l.</span></h2>
+                    <p class="about-description">UMID 2 OIL’da har bir safar mijozlarimizga bo‘lgan e’tibordan boshlanadi. Biz sifatli yoqilg‘i, samimiy xizmat va qulay muhit bilan yo‘lingizni yanada xotirjam davom ettirishingizga ko‘maklashamiz.</p>
+                    <div class="about-values">
+                        <div class="about-value"><span>01</span><div><strong>Sifatga e’tibor</strong><p>Har bir tashrifda ishonchli xizmat.</p></div><i aria-hidden="true">↗</i></div>
+                        <div class="about-value"><span>02</span><div><strong>Mijozga hurmat</strong><p>Siz uchun samimiy va e’tiborli munosabat.</p></div><i aria-hidden="true">↗</i></div>
+                        <div class="about-value"><span>03</span><div><strong>Yo‘lingizga qulaylik</strong><p>Safaringiz davom etishi uchun kerakli qulaylik.</p></div><i aria-hidden="true">↗</i></div>
+                    </div>
+                    <a class="text-link about-link" href="#services">Xizmatlarimiz bilan tanishing <span aria-hidden="true">↘</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="services section-pad" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <div><p class="eyebrow">02 / Xizmatlarimiz</p><h2>Safaringiz uchun<br><span>hamma qulaylik.</span></h2></div>
+                    <p>Yo‘lda kerak bo‘ladigan xizmatlar — bir joyda, siz uchun.</p>
+                </div>
+                <div class="service-grid">
+                    <article class="service-card">
+                        <span class="service-number">01</span>
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" fill="none"><path d="M11 33V10a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v23M8 33h22M15 12h8v7h-8zM27 14h3l3 4v11a3 3 0 0 0 6 0V17l-4-4M15 33v-5h8v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h3>Sifatli yoqilg‘i</h3>
+                        <p>Avtomobilingiz uchun tanlangan yoqilg‘i turlari va e’tiborli xizmat.</p>
+                        <a href="#fuel" aria-label="Yoqilg‘i turlarini ko‘rish">↗</a>
+                    </article>
+                    <article class="service-card service-featured">
+                        <span class="service-number">02</span>
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" fill="none"><path d="M7 20h26M20 7v26M10.8 10.8l18.4 18.4m0-18.4L10.8 29.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="2"/></svg>
+                        </div>
+                        <h3>Qulay hudud</h3>
+                        <p>Safaringizni to‘xtatmasdan, kerakli xizmatlardan foydalaning.</p>
+                        <a href="#contact" aria-label="Biz bilan bog‘lanish">↗</a>
+                    </article>
+                    <article class="service-card">
+                        <span class="service-number">03</span>
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 40 40" fill="none"><path d="M20 34s12-8.2 12-18a12 12 0 1 0-24 0c0 9.8 12 18 12 18Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="20" cy="16" r="4" stroke="currentColor" stroke-width="2"/></svg>
+                        </div>
+                        <h3>Samimiy xizmat</h3>
+                        <p>Jamoamiz sizga yordam berishga va yo‘lingizni yengillashtirishga tayyor.</p>
+                        <a href="#contact" aria-label="Bog‘lanish ma’lumotlari">↗</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="fuel section-pad" id="fuel">
+            <div class="container fuel-grid">
+                <div class="fuel-copy">
+                    <p class="eyebrow">04 / Yoqilg‘i turlari</p>
+                    <h2>Avtomobilingizga<br><span>mos tanlov.</span></h2>
+                    <p>Turli avtomobillar uchun mos yoqilg‘i turlarini taklif qilamiz. Mavjudligi bo‘yicha shoxobchamiz xodimlaridan ma’lumot oling.</p>
+                    <a class="button button-light" href="#contact">Biz bilan bog‘laning <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="fuel-list">
+                    {% for fuel in fuels %}
+                        <div class="fuel-item">
+                            <span class="fuel-grade{% if fuel.badge|length > 2 %} fuel-grade-text{% endif %}">{{ fuel.badge }}</span>
+                            <span class="fuel-name">{{ fuel.name }}</span>
+                            <span class="fuel-price">
+                                {% if fuel.price != None %}
+                                    {{ fuel.price|floatformat:"0"|intcomma }} <small>so‘m/litr</small>
+                                {% else %}
+                                    <small>Narx belgilanmoqda</small>
+                                {% endif %}
+                            </span>
+                        </div>
+                    {% endfor %}
+                    <p class="fuel-note">Yoqilg‘i mavjudligi shoxobchaga qarab farq qilishi mumkin.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact section-pad" id="contact">
+            <div class="container contact-inner">
+                <div class="contact-copy"><p class="eyebrow">Biz bilan bog‘laning</p><h2>Yo‘lingizni<br><span>birga davom ettiramiz.</span></h2></div>
+                <div class="contact-info" aria-label="Telefon raqamlari">
+                    <a class="contact-phone" href="tel:+998935000630">
+                        <span class="phone-label">Asosiy telefon</span>
+                        <strong>+998 93 500 06 30</strong>
+                    </a>
+                    <a class="contact-phone" href="tel:+998943133086">
+                        <span class="phone-label">Yordamchi telefon</span>
+                        <strong>+998 94 313 30 86</strong>
+                    </a>
+                    <a class="contact-map" href="https://www.google.com/maps/search/?api=1&amp;query=Angren+UMID+2+OIL" target="_blank" rel="noopener noreferrer">Xaritada topish <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M7 27V8.5A2.5 2.5 0 0 1 9.5 6h9A2.5 2.5 0 0 1 21 8.5V27M5 27h18M10 10h8v6h-8zM21 12h2.5a2 2 0 0 1 2 2v8a2 2 0 0 0 4 0v-8l-3-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-name">UMID <span class="brand-number">2</span> <span class="brand-light">OIL</span></span></a>
+            <span>Yaxshi yo‘l — ishonchli xizmatdan boshlanadi.</span>
+            <span>© {% now "Y" %} UMID 2 OIL</span>
+        </div>
+    </footer>
+    <script src="{% static 'js/site.js' %}" defer></script>
+</body>
+</html>
